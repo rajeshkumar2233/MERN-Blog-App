@@ -11,16 +11,17 @@ app.use("/api/user", router);
 app.use("/api/blog", blogRouter);
 
 
-if (process.env.NODE_ENV==='production'){
-  app.use(express.static("client/build"))
-}
-
 mongoose.set("strictQuery", false);
 
 mongoose
-  .connect("mongodb+srv://rajeshkumar2233:9691501076Rj@cluster0.mrghs.mongodb.net/kota")
-  .then(() => app.listen(process.env.PORT ||8000))
-
-
-  .then(() => console.log("Connected TO Database 8000"))
-  .catch((err) => console.log(err));
+  .connect("mongodb+srv://rajeshkumar2233:9691501076Rj@cluster0.mrghs.mongodb.net/koota", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(5000);
+    console.log("Connected TO Database 5000");
+  })
+  .catch((error) => {
+    console.log("Error connecting to database: ", error);
+  });
